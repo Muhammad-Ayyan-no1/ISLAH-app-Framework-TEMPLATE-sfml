@@ -1,3 +1,4 @@
+#pragma once
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <algorithm>
@@ -175,6 +176,29 @@ public:
         target.draw(shape, states);
     }
 };
+class TextAnimatable : public sf::Drawable, public sf::Transformable
+{
+public:
+    sf::Text text;
+    Animation animation;
+
+    void update(float t)
+    {
+        text.setPosition(animation.getPositionAt(t, getPosition()));
+        text.setRotation(animation.getRotationAt(t, getRotation()));
+        text.setScale(animation.getScaleAt(t, getScale()));
+    }
+
+    sf::Vector2f getPositionAt(float t) { return animation.getPositionAt(t, getPosition()); }
+    float getRotationAt(float t) { return animation.getRotationAt(t, getRotation()); }
+    sf::Vector2f getScaleAt(float t) { return animation.getScaleAt(t, getScale()); }
+
+    void draw(sf::RenderTarget &target, sf::RenderStates states) const override
+    {
+        states.transform *= getTransform();
+        target.draw(text, states);
+    }
+};
 
 // Group class for grouping shapes
 class Group : public sf::Drawable, public sf::Transformable
@@ -215,4 +239,13 @@ Animatable createRectangle(float width, float height, sf::Color color)
     rect.shape.setPoint(3, sf::Vector2f(0, height));
     rect.shape.setFillColor(color);
     return rect;
+}
+TextAnimatable createText(const sf::String &content, const sf::Font &font, unsigned int size, sf::Color color)
+{
+    TextAnimatable txt;
+    txt.text.setFont(font);
+    txt.text.setString(content);
+    txt.text.setCharacterSize(size);
+    txt.text.setFillColor(color);
+    return txt;
 }

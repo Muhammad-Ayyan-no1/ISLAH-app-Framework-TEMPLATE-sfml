@@ -1,4 +1,5 @@
-#include "animation.hpp"
+#include "components.cpp"
+#include "screenImports.h"
 
 int main()
 {
