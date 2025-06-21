@@ -1,18 +1,11 @@
-#include "common/main.h"
-#include "components.h"
-#include "screenImports.h"
-
-#include <SFML/Graphics.hpp>
-#include <vector>
-#include <memory>
+#include "SCREENS_SETUP.hpp"
 
 int main()
 {
     std::vector<std::unique_ptr<defaultScreenTYPE__sys>> renderingScreens;
-    renderingScreens.reserve(10); // should be enough
-    renderingScreens.push_back(std::make_unique<RedScreen>());
+    setupRenderingScreens(renderingScreens);
 
-    sf::RenderWindow window(sf::VideoMode({1920u, 1080u}), "SFML Window");
+    sf::RenderWindow window(sf::VideoMode({1920u, 1080u}), "ISLAH Framework");
     window.setFramerateLimit(144);
 
     while (window.isOpen())

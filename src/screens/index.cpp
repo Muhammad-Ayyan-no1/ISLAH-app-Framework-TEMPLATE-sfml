@@ -1,6 +1,4 @@
-#include <SFML/Graphics.hpp>
-#include <memory>
-#include <vector>
+#include "components.h"
 #include "common/main.h"
 
 class RedScreen : public defaultScreenTYPE__sys
