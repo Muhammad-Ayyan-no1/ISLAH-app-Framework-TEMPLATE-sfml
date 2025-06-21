@@ -116,7 +116,7 @@ public:
             }
             else
             {
-                LOG_custom("WARNING: Using fallback screen cursor position instead of window");
+                LOG_custom("WARNING", "Using fallback screen cursor position instead of window");
                 pointerPosition = static_cast<sf::Vector2f>(sf::Mouse::getPosition());
             }
         }

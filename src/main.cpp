@@ -2,6 +2,15 @@
 
 int main()
 {
+    sf::Font defaultFont;
+    if (!defaultFont.loadFromFile("include/arial/arial.ttf"))
+    {
+        return -1;
+    }
+    else
+    {
+        LOG_custom("PROCESS", "Loaded default font");
+    }
     std::vector<std::unique_ptr<defaultScreenTYPE__sys>> renderingScreens;
     setupRenderingScreens(renderingScreens);
 

@@ -1,4 +1,5 @@
 #include "components.h"
+#include "defaultTYPE__sys.cpp"
 #include "common/main.h"
 
 class RedScreen : public defaultScreenTYPE__sys
