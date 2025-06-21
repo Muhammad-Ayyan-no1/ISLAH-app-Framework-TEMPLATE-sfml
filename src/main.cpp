@@ -1,51 +1,19 @@
-#include "components.cpp"
+#include "common/main.h"
+#include "components.h"
 #include "screenImports.h"
+
+#include <SFML/Graphics.hpp>
+#include <vector>
+#include <memory>
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(800, 600), "SFML Animation System");
-    sf::Clock clock;
+    std::vector<std::unique_ptr<defaultScreenTYPE__sys>> renderingScreens;
+    renderingScreens.reserve(10); // should be enough
+    renderingScreens.push_back(std::make_unique<RedScreen>());
 
-    // Create a triangle
-    Animatable triangle;
-    triangle.shape.setPointCount(3);
-    triangle.shape.setPoint(0, sf::Vector2f(0, 0));
-    triangle.shape.setPoint(1, sf::Vector2f(100, 0));
-    triangle.shape.setPoint(2, sf::Vector2f(50, 100));
-    triangle.shape.setFillColor(sf::Color::Red);
-
-    // Animation for triangle (movement and morphing)
-    Animation triAnim;
-    triAnim.positionKeyframes.push_back({0, sf::Vector2f(100, 100), false});
-    triAnim.positionKeyframes.push_back({2, sf::Vector2f(300, 300), false});
-    triAnim.rotationKeyframes.push_back({0, 0, false});
-    triAnim.rotationKeyframes.push_back({2, 360, false});
-    triAnim.shapeKeyframes.push_back({0, {sf::Vector2f(0, 0), sf::Vector2f(100, 0), sf::Vector2f(50, 100)}});
-    triAnim.shapeKeyframes.push_back({2, {sf::Vector2f(0, 0), sf::Vector2f(100, 0), sf::Vector2f(0, 100)}});
-    triAnim.sortKeyframes();
-    triangle.animation = triAnim;
-
-    // Create a rectangle
-    Animatable rect = createRectangle(80, 50, sf::Color::Blue);
-
-    // Animation for rectangle (relative movement and scaling)
-    Animation rectAnim;
-    rectAnim.positionKeyframes.push_back({0, sf::Vector2f(0, 0), true});
-    rectAnim.positionKeyframes.push_back({2, sf::Vector2f(100, 50), true});
-    rectAnim.scaleKeyframes.push_back({0, sf::Vector2f(1, 1), false});
-    rectAnim.scaleKeyframes.push_back({2, sf::Vector2f(1.5, 1.5), true});
-    rectAnim.sortKeyframes();
-    rect.animation = rectAnim;
-
-    // Group the shapes
-    Group group;
-    group.members.push_back(triangle);
-    group.members.push_back(rect);
-    Animation groupAnim;
-    groupAnim.positionKeyframes.push_back({0, sf::Vector2f(0, 0), false});
-    groupAnim.positionKeyframes.push_back({4, sf::Vector2f(200, 0), false});
-    groupAnim.sortKeyframes();
-    group.animation = groupAnim;
+    sf::RenderWindow window(sf::VideoMode({1920u, 1080u}), "SFML Window");
+    window.setFramerateLimit(144);
 
     while (window.isOpen())
     {
@@ -53,14 +21,24 @@ int main()
         while (window.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
+            {
                 window.close();
+            }
         }
 
-        float t = clock.getElapsedTime().asSeconds();
-        group.update(t);
+        window.clear();
 
-        window.clear(sf::Color::Black);
-        window.draw(group);
+        for (const auto &screen : renderingScreens)
+        {
+            if (screen->rendering)
+            {
+                for (const auto &drawable : *screen->state)
+                {
+                    window.draw(*drawable);
+                }
+            }
+        }
+
         window.display();
     }
 
