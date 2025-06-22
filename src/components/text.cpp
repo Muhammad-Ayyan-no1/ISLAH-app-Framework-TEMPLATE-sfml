@@ -18,7 +18,7 @@ public:
     std::size_t maxLineLength = 0;
 
     COMP_text(
-        const sf::String &text_str, const sf::Font &font, sf::Color color, sf::Window *window = nullptr,
+        const sf::String &text_str, const sf::Font &font, sf::Color color, std::size_t maxLineLen, sf::Window *window = nullptr,
         std::function<void(sf::Event)> onClick = nullptr,
         std::function<void(sf::Event)> onHover = nullptr,
         std::function<void(sf::Event)> onClickStart = nullptr,
@@ -30,6 +30,7 @@ public:
           onHoverStart(onHoverStart), onHoverEnd(onHoverEnd),
           windowOpt(window)
     {
+        maxLineLength = maxLineLen;
         text.setFont(font);
         text.setString(text_str);
         text.setFillColor(color);

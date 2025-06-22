@@ -1,3 +1,4 @@
+#pragma once
 #include "components.h"
 #include "defaultTYPE__sys.cpp"
 #include "common/main.h"

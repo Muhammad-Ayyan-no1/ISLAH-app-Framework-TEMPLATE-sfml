@@ -1,3 +1,4 @@
+#pragma once
 #include "common/main.h"
 #include "components.h"
 #include "screenImports.h"
