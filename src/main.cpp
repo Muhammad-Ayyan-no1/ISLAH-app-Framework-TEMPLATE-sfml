@@ -43,25 +43,27 @@ int main()
     std::vector<std::unique_ptr<defaultScreenTYPE__sys>> renderingScreens;
     setupRenderingScreens(renderingScreens);
 
-    sf::RenderWindow window(sf::VideoMode({1920u, 1080u}), "ISLAH Framework");
-    window.setFramerateLimit(144);
+    defaultWindow.create(sf::VideoMode({1920u, 1080u}), "ISLAH Framework");
+    defaultWindow.setFramerateLimit(144);
+
     loadDefaults();
     handleScreenInit(renderingScreens);
-    while (window.isOpen())
+
+    while (defaultWindow.isOpen())
     {
         sf::Event event;
-        while (window.pollEvent(event))
+        while (defaultWindow.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
             {
-                window.close();
+                defaultWindow.close();
             }
             handleScreenEvents(renderingScreens, event);
         }
 
-        window.clear();
-        handleScreenDraw(renderingScreens, window);
-        window.display();
+        defaultWindow.clear();
+        handleScreenDraw(renderingScreens, defaultWindow);
+        defaultWindow.display();
     }
 
     return 0;

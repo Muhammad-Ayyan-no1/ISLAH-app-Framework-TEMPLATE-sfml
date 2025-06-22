@@ -2,6 +2,7 @@
 #include "SCREENS_SETUP.hpp" // just because vscode is complaining
 
 sf::Font defaultFont;
+sf::RenderWindow defaultWindow;
 
 void loadDefaults()
 {
