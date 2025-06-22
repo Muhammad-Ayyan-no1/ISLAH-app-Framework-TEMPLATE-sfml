@@ -11,9 +11,10 @@ public:
     defaultScreenTYPE__sys()
     {
     }
-    void init()
-    {
-    }
+    // void init()
+    // {
+    // }
+    void init();
 
     bool rendering = 0;
 };

@@ -1,6 +1,6 @@
 #include "common/main.h"
 
-class button
+class COMP_button
 {
 private:
     sf::Vector2f textMarginStore;
@@ -31,18 +31,18 @@ public:
     sf::RectangleShape background;
     sf::Text text;
 
-    button(const sf::String &textStr, sf::Vector2f position, sf::Vector2f scale, float rotation,
-           sf::Vector2f textMargin, unsigned int textSize,
-           sf::Color bgColor, sf::Color textColor, const sf::Font &font, sf::Window *window,
-           std::function<void(sf::Event)> onClick,
-           std::function<void(sf::Event)> onHover,
-           std::function<void(sf::Event)> onFocus,
-           std::function<void(sf::Event)> onClickEnd,
-           std::function<void(sf::Event)> onClickStart,
-           std::function<void(sf::Event)> onHoverStart,
-           std::function<void(sf::Event)> onHoverEnd,
-           std::function<void(sf::Event)> onFocusStart,
-           std::function<void(sf::Event)> onFocusEnd)
+    COMP_button(const sf::String &textStr, sf::Vector2f position, sf::Vector2f scale, float rotation,
+                sf::Vector2f textMargin, unsigned int textSize,
+                sf::Color bgColor, sf::Color textColor, const sf::Font &font, sf::Window *window,
+                std::function<void(sf::Event)> onClick,
+                std::function<void(sf::Event)> onHover,
+                std::function<void(sf::Event)> onFocus,
+                std::function<void(sf::Event)> onClickEnd,
+                std::function<void(sf::Event)> onClickStart,
+                std::function<void(sf::Event)> onHoverStart,
+                std::function<void(sf::Event)> onHoverEnd,
+                std::function<void(sf::Event)> onFocusStart,
+                std::function<void(sf::Event)> onFocusEnd)
         : onClick(onClick), onHover(onHover), onFocus(onFocus),
           onClickEnd(onClickEnd), onClickStart(onClickStart),
           onHoverStart(onHoverStart), onHoverEnd(onHoverEnd),
