@@ -11,10 +11,12 @@ public:
     defaultScreenTYPE__sys()
     {
     }
-    // void init()
-    // {
-    // }
-    void init();
+
+    // so bad , I dont wana use vtables but for sake of api
+    virtual void init() {};
+    virtual void handleEvent(const sf::Event &event) {};
 
     bool rendering = 0;
+    bool getInit = 0;
+    bool getEvents = 0;
 };

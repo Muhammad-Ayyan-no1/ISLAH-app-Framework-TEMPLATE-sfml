@@ -13,6 +13,18 @@ public:
         rect->setFillColor(sf::Color::Red);
         rect->setPosition(100, 100);
         state->push_back(rect);
+
         rendering = true;
+        getInit = true;
+        getEvents = true;
+    }
+    void init() override
+    {
+        LOG_custom("Test", "INIT");
+    }
+    void handleEvent(const sf::Event &event) override
+    {
+        LOG_custom("Test", "EVENTS");
+        getEvents = false; // bec im just testing dont need useless logs
     }
 };
